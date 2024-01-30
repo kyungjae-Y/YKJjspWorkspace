@@ -9,11 +9,11 @@
 <body>
 	<%
 	/*
-		form 데이터의 값을 받아오는 객체 => request 받아서 저장 
+	form 데이터의 값을 받아오는 객체 => request 받아서 저장 
 	*/
 
 	/*
-	 한글 깨짐을 방지할 수 있다 => request 값 불러오기전에 인코딩 셋팅을 해줘야한다
+	한글 깨짐을 방지할 수 있다 => request 값 불러오기전에 인코딩 셋팅을 해줘야한다
 	*/
 	request.setCharacterEncoding("utf-8");
 
@@ -42,11 +42,8 @@
 		n2 = Integer.parseInt(request.getParameter("su2"));
 	%>
 	<h1>
-		num1 =<%=num1%></h1>
-	<h1>
-		num2 =<%=num2%></h1>
-	<h1>
-		hap =<%=n1 + n2%></h1>
+		hap =
+		<%=n1 + n2%></h1>
 
 	<%
 	} else {
