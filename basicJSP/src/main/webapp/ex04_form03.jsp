@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="ex05_form04.jsp" method="get">
+	<form action="ex06_form05.jsp" method="get">
 		첫번째 수 : <input type="text" name="su1" /> <br> 두번째 수 : <input
 			type="text" name="su2" /> <br>
 		<button>전송</button>
