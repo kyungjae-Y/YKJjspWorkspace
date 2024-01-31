@@ -1,5 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+if (session.getAttribute("log") == null) {
+	System.out.println("test");
+	response.sendRedirect("index.jsp");
+}
+int index = (int) session.getAttribute("log");
+
+ArrayList<String> idlist = (ArrayList<String>) session.getAttribute("idList");
+ArrayList<String> namelist = (ArrayList<String>) session.getAttribute("namelist");
+ArrayList<String> genderlist = (ArrayList<String>) session.getAttribute("genderList");
+String gender = genderlist.get(index);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,39 +19,30 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div align="center">
-	<h1>회원정보 수정</h1>
-	<form action="03_32_updatePro.jsp">
+	<h1>회원수정</h1>
+	<form action="03_32updatePro.jsp" method="post">
 		<table border="1">
 			<tr>
 				<td>아이디</td>
-				<td colspan="2"><input type="text" name="id"></td>
+				<td><input type="text" name="id" value="<%=idlist.get(index)%>" readonly></td>
 			</tr>
 			<tr>
 				<td>패스워드</td>
-				<td colspan="2"><input type="password" name="pw"></td>
+				<td><input type="password" name="pw" required></td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td colspan="2"><input type="text" name="name"></td>
+				<td><input type="text" name="name" value="<%=namelist.get(index)%>"></td>
 			</tr>
 			<tr>
 				<td>성별</td>
-				<td colspan="2">
-				<input type="radio" name="gender"> 남성
-				<input type="radio" name="gender"> 여성
-				</td>
+				<td><input type="radio" name="gender" value="남성" <%if (gender.equals("남성")) {%> checked <%}%> />남성&nbsp; <input type="radio" name="gender" value="여성" <%if (gender.equals("여성")) {%> checked <%}%>>여성&nbsp;</td>
 			</tr>
 			<tr>
-				<td colspan="3" align="center"><input type="submit" value="입력완료"></td>
+				<td colspan="2" align="center" id="submit"><input type="submit" value="정보수정"></td>
 			</tr>
 		</table>
-		<br>
 	</form>
-	&nbsp;
-	<form action="02_main.jsp">
-		<input type="submit" value="메인화면">
-	</form>
-</div>
+	<input type="button" value="메인으로" id="btn" onclick="location.href='02_main.jsp'" />
 </body>
 </html>
