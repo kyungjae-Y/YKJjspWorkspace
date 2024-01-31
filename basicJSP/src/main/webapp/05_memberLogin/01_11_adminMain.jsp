@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,16 +6,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div align="center">
-		<h1>관리자 페이지</h1>
-		<table>
-			<tr>
-				<td><a href="02_main.jsp">로그아웃</a></td>
-			</tr>
-			<tr>
-				<td><a href="01_12_adminUserList.jsp">회원관리</a></td>
-			</tr>
-		</table>
-	</div>
+	<h1>관리자 메인</h1>
+	<a href="03_23logoutPro.jsp"> 로그아웃 </a>
+	<a href="01_13adminUserList.jsp"> 회원관리 </a>
+	<input type="button" value="메인으로" id="btn" onclick="location.href='02_main.jsp'" />
 </body>
 </html>
