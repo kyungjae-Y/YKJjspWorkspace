@@ -1,7 +1,6 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.Arrays"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 ArrayList<String> sampleId = new ArrayList<String>(Arrays.asList("qwer", "abcd", "hello", "admin"));
 ArrayList<String> samplePw = new ArrayList<String>(Arrays.asList("1111", "2222", "3333", "admin"));
