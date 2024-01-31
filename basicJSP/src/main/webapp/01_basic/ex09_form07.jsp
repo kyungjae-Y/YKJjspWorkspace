@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 int grade = 4;
 %>
@@ -46,13 +45,10 @@ int grade = 4;
 				</tr>
 				<tr>
 					<td>메모</td>
-					<td><textarea rows="10" cols="50" name="memo">
-				
-				</textarea></td>
+					<td><textarea rows="10" cols="50" name="memo"></textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center">
-					<input type="submit" value="입력완료"></td>
+					<td colspan="2" align="center"><input type="submit" value="입력완료"></td>
 				</tr>
 			</table>
 		</form>
