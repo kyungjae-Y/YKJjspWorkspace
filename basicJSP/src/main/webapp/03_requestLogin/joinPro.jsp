@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +11,9 @@
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 
-	String[] member = { name, id, pw };
+	String[] member = {
+		name, id, pw
+	};
 	request.setAttribute("member", member);
 
 	// 자바에서 페이지 이동
