@@ -4,8 +4,13 @@
 if (session.getAttribute("log") == null) {
 	System.out.println("test");
 	response.sendRedirect("index.jsp");
+	return;
 }
 int index = (int) session.getAttribute("log");
+if (index == -1) {
+	response.sendRedirect("index.jsp");
+	return;
+}
 
 ArrayList<String> idlist = (ArrayList<String>) session.getAttribute("idList");
 ArrayList<String> namelist = (ArrayList<String>) session.getAttribute("namelist");
