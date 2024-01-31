@@ -1,44 +1,52 @@
-<%@ page import="java.util.Arrays"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<script type="text/javascript" src="commom.js"></script>
+
 <%
-ArrayList<String> sampleId = new ArrayList<String>(Arrays.asList("qwer", "abcd", "hello", "admin"));
-ArrayList<String> samplePw = new ArrayList<String>(Arrays.asList("1111", "2222", "3333", "admin"));
-ArrayList<String> sampleName = new ArrayList<String>(Arrays.asList("이만수", "박영희", "이수민", "관리자"));
-ArrayList<String> sampleGender = new ArrayList<String>(Arrays.asList("남성", "여성", "여성", "남성"));
-int log = -1;
+if (session.getAttribute("log") == null) {
+	response.sendRedirect("index.jsp");
+}
 
-session.getAttribute("idList");
-session.getAttribute("pwList");
-session.getAttribute("nameList");
-session.getAttribute("genderList");
-session.getAttribute("log");
+String id = request.getParameter("id");
+String pw = request.getParameter("pw");
 
-String enteredId = request.getParameter("id");
-String enteredPw = request.getParameter("pw");
+ArrayList<String> idList = (ArrayList<String>) session.getAttribute("idList");
+ArrayList<String> pwList = (ArrayList<String>) session.getAttribute("pwList");
+boolean pass = false;
+int idx = -1;
+for (int i = 0; i < idList.size(); i += 1) {
+	if (idList.get(i).equals(id)) {
+		idx = i;
+		break;
+	}
+}
+if (idx != -1 && pw.equals(pwList.get(idx))) {
+	pass = true;
+}
+
+if (!pass) {
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<%
-	for (int i = 0; i < sampleId.size(); i++) {
-		if (enteredId.equals(sampleId.get(i)) && enteredPw.equals(samplePw.get(i))) {
-			session.setAttribute("loggedInUser", sampleName.get(i));
-			session.setAttribute("loggedInGender", sampleGender.get(i));
-			log = 1;
-			break;
-		}
-	}
-	if (log == 3) {
-		response.sendRedirect("01_11_adminMain.jsp");
-	} else {
-		response.sendRedirect("02_main.jsp");
-	}
-	%>
-</body>
-</html>
+<script>
+	msgUrl("로그인실패", "03_21loginForm.jsp");
+</script>
+
+<%
+}
+session.setAttribute("log", idx);
+if (id.equals("admin")) {
+%>
+<script>
+	msgUrl("관리자님 환영합니다", "01_11_adminMain.jsp");
+</script>
+
+<%
+} else {
+%>
+<script>
+	msgGoMain("로그인성공");
+</script>
+
+<%
+}
+%>
