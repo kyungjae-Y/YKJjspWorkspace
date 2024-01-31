@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String name = request.getParameter("name");
 String id = request.getParameter("id");
@@ -30,22 +29,17 @@ function printMsg(id, pw , name , url ,msg) {
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>
-		<%=name%></h1>
-	<h1>
-		<%=id%></h1>
-	<h1>
-		<%=pw%></h1>
-	<h1>
-		<%=inputId%></h1>
-	<h1>
-		<%=inputPw%></h1>
+	<h1><%=name%></h1>
+	<h1><%=id%></h1>
+	<h1><%=pw%></h1>
+	<h1><%=inputId%></h1>
+	<h1><%=inputPw%></h1>
 	<h1><%=msg%></h1>
 	<%
 	if (pass) {
 	%>
-	
-<script>
+
+	<script>
 printMsg("<%=id%>" ,'<%=pw%>','<%=name%>',"index.jsp" ,"로그인성공" );
 </script>
 	<%
