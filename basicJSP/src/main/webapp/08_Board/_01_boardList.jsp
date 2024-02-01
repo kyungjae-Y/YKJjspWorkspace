@@ -1,25 +1,23 @@
+<%@page import="board.Board"%>
+<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List"%>
-<%@ page import="board.BoardDAO, board.BoardVO"%>
-<%@ page import="java.text.SimpleDateFormat"%>
-<%@ page import="java.util.Date"%>
-
 <%
-BoardDAO boardDAO = new BoardDAO();
-boardDAO.addBoard(new BoardVO(1, "John Doe", "Sample Title", "Sample Content", "2024-01-31"));
-boardDAO.addBoard(new BoardVO(2, "Jane Doe", "Another Title", "Another Content", "2024-02-01"));
-
-List<BoardVO> boardList = boardDAO.getAllBoards();
+if (session.getAttribute("dao") == null) {
+	response.sendRedirect("index.jsp");
+	return;
+}
+BoardDAO dao = (BoardDAO) session.getAttribute("dao");
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board List</title>
+<title>Insert title here</title>
 </head>
 <body>
-<form action="_06_deleteBoardPro.jsp">
+	<p>
+		전체 게시글 수
+		<%=dao.getTotalData()%></p>
 	<table border="1">
 		<tr>
 			<th>번호</th>
@@ -30,21 +28,26 @@ List<BoardVO> boardList = boardDAO.getAllBoards();
 			<th>삭제</th>
 		</tr>
 		<%
-		for (BoardVO board : boardList) {
+		for (int i = 0; i < dao.getTotalData(); i += 1) {
+			Board b = dao.getOneBoard(i);
 		%>
 		<tr>
-			<td><%=board.getNo()%></td>
-			<td><%=board.getWriter()%></td>
-			<td><%=board.getRegDate()%></td>
-			<td><a href="_05_updateBoard.jsp?boardNo=<%=board.getSubject()%>"><%=board.getSubject()%></a></td>
-			<td><%=board.getContents()%></td>
-			<td><button type="submit">삭제</button></td>
-			<%-- <td><a href="_06_deleteBoardPro.jsp?boardNo=<%=board.getNo()%>">삭제</a></td> --%>
+			<td><%=b.getNo()%></td>
+			<td><%=b.getWriter()%></td>
+			<td><%=b.getRegDate()%></td>
+			<td><a href="_05_updateBoard.jsp?idx=<%=i%>"> <%=b.getSubject()%>
+			</a></td>
+			<td><%=b.getContents()%></td>
+			<td>
+				<button onclick="location.href='_06_deleteBoardPro.jsp?idx=<%=i%>'">삭제</button>
+			</td>
 		</tr>
 		<%
 		}
 		%>
 	</table>
-</form>
+	<br>
+	<br>
+	<button onclick="location.href='_00_main.jsp'">메인으로</button>
 </body>
 </html>
