@@ -30,7 +30,7 @@
 				</tr>
 				<tr>
 					<th>취미</th>
-					<td><input type="checkbox" name="hobby" value="sports">스포츠 <input type="checkbox" name="hobby" value="reading">독서 <input type="checkbox" name="hobby" value="drawing">그림</td>
+					<td><input type="checkbox" name="hobby" value="sports">스포츠<input type="checkbox" name="hobby" value="reading">독서<input type="checkbox" name="hobby" value="drawing">그림</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit" value="회원가입"></td>

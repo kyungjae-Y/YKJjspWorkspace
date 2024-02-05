@@ -19,7 +19,9 @@ ArrayList<Member> list = MemberDAO.getInstance().getMemberList();
 		<td>전화번호</td>
 		<td>삭제</td>
 	</tr>
-	<% for(Member vo : list){ %>
+	<%
+	for (Member vo : list) {
+	%>
 	<tr>
 		<td><%=vo.getNum()%></td>
 		<td><a href="05_memberContent.jsp?num=<%=vo.getNum()%>"><%=vo.getId()%></a></td>
@@ -30,7 +32,9 @@ ArrayList<Member> list = MemberDAO.getInstance().getMemberList();
 		<td><%=vo.getPhone()%></td>
 		<td><input type="button" value="삭제" class="btn btn-outline-dark" onclick="location.href='06_memberDeletePro.jsp?num=<%=vo.getNum()%>'"></td>
 	</tr>
-	<% } %>
+	<%
+	}
+	%>
 
 </table>
 
