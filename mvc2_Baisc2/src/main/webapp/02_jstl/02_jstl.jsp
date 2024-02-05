@@ -10,7 +10,7 @@
 <body>
 	<h3>JSTL core 태그예제 - if</h3>
 	<c:set var="country" value="korea" />
-	<!-- country = korea -->
+	<!-- country = "korea" -->
 	<c:if test="${ country ne null }">
 		국가명: <c:out value="${country}" />
 		<br>

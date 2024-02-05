@@ -14,7 +14,6 @@ list.add(mem3);
 
 request.setAttribute("memberList", list);
 %>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>

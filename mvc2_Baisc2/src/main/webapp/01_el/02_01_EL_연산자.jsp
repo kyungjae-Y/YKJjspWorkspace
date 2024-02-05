@@ -7,7 +7,7 @@
 </head>
 <body>
 	<%
-	// Servlet페이지에서 아래와 같은 변수명으로 저장되었을 때
+	// Servlet 페이지에서 아래와 같은 변수명으로 저장되었을 때
 	request.setAttribute("x", 10);
 	request.setAttribute("y", 3);
 	%>
@@ -19,23 +19,23 @@
 	<br> 나머지 ${ x % y }
 	<br> 나머지 ${ x mod y }
 	<br>
-	<!-- 나머지는 키워드도 제공한다. -->
+	<!-- 나머지는 키워드도 제공한다 -->
 	<h2>비교연산</h2>
 	${x > y} ${x < y} ${x >= y} ${x <= y} ${x == y} ${x != y}
 	<br>
 	<h2>비교연산 키워드</h2>
-	${x gt y}
 	<%-- greater than --%>
-	${x lt y}
+	${x gt y}
 	<%-- less than --%>
-	${x ge y}
+	${x lt y}
 	<%-- greater or equal --%>
-	${x le y}
+	${x ge y}
 	<%-- less or equal --%>
-	${x eq y}
+	${x le y}
 	<%-- equal --%>
-	${x ne y}
+	${x eq y}
 	<%-- not equal --%>
+	${x ne y}
 	<br>
 	<h2>논리연산자</h2>
 	${ x == x && y == y } ${ x == x || x == y } ${!(x == x)}

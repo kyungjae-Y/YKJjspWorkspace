@@ -13,12 +13,12 @@
 	request.setAttribute("name2", "이순신");
 	%>
 	${name1 ne name2} ${null ne name1}
-	<%-- list, map등 객체가 비어있는지 확인 : empty, !empty --%>
+	<%-- list, map 등 객체가 비어있는지 확인 : empty, !empty --%>
 	<%
 	ArrayList<Integer> list = new ArrayList<Integer>();
 	list.add(10);
 	request.setAttribute("list", list);
-	%>
+	%>s
 	${!empty list} ${empty list }
 </body>
 </html>

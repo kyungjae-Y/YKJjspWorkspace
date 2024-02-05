@@ -36,7 +36,7 @@
 			###
 			####
 			#####
-		 --%>
+	 --%>
 	<c:forEach var="i" begin="1" end="5">
 		<c:forEach var="j" begin="1" end="${ i }">
 			#
@@ -50,7 +50,7 @@
 		  ###
 		 ####
 		#####
-		 --%>
+	 --%>
 	<%
 	for (int i = 1; i <= 5; i++) {
 		for (int j = 4; j >= i; j--) {
@@ -101,17 +101,3 @@
 	</c:forEach>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

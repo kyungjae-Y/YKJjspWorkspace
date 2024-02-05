@@ -17,7 +17,6 @@ int check2 = (int) request.getAttribute("check");
 	<h2>
 		check =
 		<%=check2%></h2>
-
 	<h3>
 		<%=id%></h3>
 	<h3>
