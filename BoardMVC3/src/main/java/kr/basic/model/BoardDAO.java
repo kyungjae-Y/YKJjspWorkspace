@@ -34,7 +34,7 @@ public class BoardDAO {
 
 	// 보드 추가
 	public int boardAdd(Board b) {
-		String SQL = "insert into board(no, writer, subject, contents, regDate) values(?,?,?,?,?)";
+		String SQL = "insert into board(b_no, b_writer, b_subject, b_contents, b_regDate) values(?,?,?,?,?)";
 		getConnect();
 		int cnt = -1;
 		try {
@@ -62,12 +62,12 @@ public class BoardDAO {
 			ps = conn.prepareStatement(SQL);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				int no = rs.getInt("no");
-				String writer = rs.getString("writer");
-				String subject = rs.getString("subject");
-				String contents = rs.getString("contents");
-				String regDate = rs.getString("regDate");
-				Board b = new Board(no, writer, regDate, subject, contents);
+				int no = rs.getInt("b_no");
+				String writer = rs.getString("b_writer");
+				String subject = rs.getString("b_subject");
+				String contents = rs.getString("b_contents");
+				String regDate = rs.getString("b_regDate");
+				Board b = new Board(no, writer, subject, contents, regDate);
 				list.add(b);
 			}
 		} catch (Exception e) {
@@ -76,6 +76,67 @@ public class BoardDAO {
 			dbClose();
 		}
 		return list;
+	}
+
+	// 보드 삭제
+	public int boardDelete(int no) {
+		String SQL = "delete from board where b_no=?";
+		getConnect();
+		int cnt = -1;
+		try {
+			ps = conn.prepareStatement(SQL);
+			ps.setInt(1, no);
+			cnt = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}
+		return cnt;
+	}
+
+	// 보드 수정 불러오기
+	public Board boardContent(int num) {
+		String SQL = "select * from board where b_no=?";
+		getConnect();
+		Board b = null;
+		try {
+			ps = conn.prepareStatement(SQL);
+			ps.setInt(1, num);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				int no = rs.getInt("b_no");
+				String writer = rs.getString("b_writer");
+				String subject = rs.getString("b_subject");
+				String contents = rs.getString("b_contents");
+				String regDate = rs.getString("b_regDate");
+				b = new Board(no, writer, subject, contents, regDate);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}
+		return b;
+	}
+
+	// 보드 수정
+	public int boardUpdate(int no, String subject, String contents) {
+		String SQL = "update board set b_subject=?, b_contents=? where b_no=?";
+		getConnect();
+		int cnt = -1;
+		try {
+			ps = conn.prepareStatement(SQL);
+			ps.setString(1, subject);
+			ps.setString(2, contents);
+			ps.setInt(3, no);
+			cnt = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}
+		return cnt;
 	}
 
 	// 데이터베이스 연결 끊기

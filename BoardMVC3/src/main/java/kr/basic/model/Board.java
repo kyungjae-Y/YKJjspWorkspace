@@ -10,7 +10,7 @@ public class Board {
 	public Board() {
 	}
 
-	public Board(int no, String writer, String regDate, String subject, String contents) {
+	public Board(int no, String writer, String subject, String contents, String regDate) {
 		super();
 		this.no = no;
 		this.writer = writer;

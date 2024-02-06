@@ -1,9 +1,3 @@
-<%@page import="kr.basic.model.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-if (session.getAttribute("dao") == null) {
-	response.sendRedirect("index.jsp");
-	return;
-}
-BoardDAO dao = (BoardDAO) session.getAttribute("dao");
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />

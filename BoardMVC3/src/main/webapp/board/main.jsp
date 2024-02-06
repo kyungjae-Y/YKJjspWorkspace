@@ -14,7 +14,7 @@
 		<a href="_03_deleteAllBoardPro.jsp">전체 게시글 삭제하기</a>
 	</h3>
 	<h3>
-		<a href="_04_addBoard.jsp">게시글 추가하기</a>
+		<a href="${ctx}/board/boardAdd.jsp">게시글 추가하기</a>
 	</h3>
 	<hr>
 	<h3>
