@@ -3,7 +3,6 @@
 	<name>MemberMVC03</name>
 	<comment></comment>
 	<projects>
-		<project>mysql-connector-java-8.0.15</project>
 		<project>jstl-1.2</project>
 	</projects>
 	<buildSpec>
