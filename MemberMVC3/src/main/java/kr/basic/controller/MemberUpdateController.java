@@ -3,35 +3,33 @@ package kr.basic.controller;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.basic.model.MemberDAO;
 import kr.basic.model.Member;
 
-@WebServlet("/memberUpdate.do")
-public class MemberUpdateController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class MemberUpdateController implements Controller {
+	@Override
+	public String requestHandler(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		if (req.getParameter("num") == null) {
+			return "memberContent";
+		}
+		int num = Integer.parseInt(req.getParameter("num"));
+		int age = Integer.parseInt(req.getParameter("age"));
+		String email = req.getParameter("email");
+		String phone = req.getParameter("phone");
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		// 파라미터 수집(VO)
-		int num = Integer.parseInt(request.getParameter("num"));
-		int age = Integer.parseInt(request.getParameter("age"));
-		String email = request.getParameter("email");
-		String phone = request.getParameter("phone");
-
-		Member vo = new Member();
-		vo.setNum(num);
-		vo.setAge(age);
-		vo.setEmail(email);
-		vo.setPhone(phone);
-		String ctx = request.getContextPath();
-		int cnt = MemberDAO.getInstance().memberUpdate(vo);
+		Member m = new Member();
+		m.setNum(num);
+		m.setAge(age);
+		m.setEmail(email);
+		m.setPhone(phone);
+		String ctx = req.getContextPath();
+		int cnt = MemberDAO.getInstance().memberUpdate(m);
 		if (cnt > 0) {
-			response.sendRedirect(ctx + "/memberList.do");
+			return "redirect:" + ctx + "/memberList.do";
 		} else {
 			throw new ServletException("not update");
 		}
