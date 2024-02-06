@@ -21,7 +21,7 @@
 			<td>${vo.age}</td>
 			<td>${vo.email}</td>
 			<td>${vo.phone}</td>
-			<td><input type="button" value="삭제" class="btn btn-outline-dark" onclick="location.href='${ctx}/memberDelete.do?num=${vo.num}' "></td>
+			<td><input type="button" value="삭제" class="btn btn-outline-dark" onclick="location.href='${ctx}/memberDelete.do?id=${vo.id}' "></td>
 		</tr>
 	</c:forEach>
 </table>

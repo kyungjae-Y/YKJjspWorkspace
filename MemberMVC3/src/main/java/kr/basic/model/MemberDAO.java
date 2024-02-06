@@ -1,58 +1,73 @@
 package kr.basic.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+// JDBC->myBatis, JPA
+import java.sql.*;
 import java.util.ArrayList;
 
 public class MemberDAO {
-
 	private MemberDAO() {
 	}
 
-	static private MemberDAO instance;
+	static private MemberDAO instance = new MemberDAO();
 
 	static public MemberDAO getInstance() {
-		if (instance == null) {
-			instance = new MemberDAO();
-		}
 		return instance;
 	}
 
-	private Connection conn; // db 객체
-	private PreparedStatement ps; // 쿼리문 객체 
-	private ResultSet rs; // 뷰테이블 객체 
+	private Connection conn;
+	private PreparedStatement ps;
+	private ResultSet rs;
 
-	// 데이터베이스 연동하기 => conncection 객체 생성 
-	private void getConnect() {
-		String url = "jdbc:mysql://localhost:3306/testdb?charaterEncoding=UTF-8&serverTimezone=UTC";
+	// 데이터베이스 연결객체 생성(Connection)
+	public void getConnect() {
+		// 데이터베이스접속 URL
+		String URL = "jdbc:mysql://localhost:3306/testdb?characterEncoding=UTF-8&serverTimezone=UTC";
 		String user = "root";
 		String password = "1234";
+		// MySQL Driver Loading
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(url, user, password);
-			System.out.println(conn);
-		} catch (SQLException e) {
+			// 동적로딩(실행시점에서 객체를 생성하는 방법)
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			conn = DriverManager.getConnection(URL, user, password);
+			System.out.println("db 연동성공: " + conn);
+		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("연동실패");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("driver 클래스 찾지 못함 ");
 		}
 	}
 
-	public ArrayList<Member> getMemberList() {
-		ArrayList<Member> list = new ArrayList<Member>();
-		String sql = "select * from member";
+	// 회원저장 동작
+	public int memberInsert(Member vo) {
+		//                                                             ?(파라메터) 1 2 3 4 5 6   
+		String SQL = "insert into member(id, pass, name, age, email, phone) values(?,?,?,?,?,?)";
+		getConnect();
+		// SQL문장을 전송하는 객체 생성
+		int cnt = -1;
 		try {
-			getConnect();
-			ps = conn.prepareStatement(sql); // string 값을 sql 명령문으로 만드는 객체
-			rs = ps.executeQuery(); // 명령문을 실행 후 뷰테이블을 담은 객체
+			ps = conn.prepareStatement(SQL); // 미리 컴파일을 시킨다(속도가빠르기)
+			ps.setString(1, vo.getId());
+			ps.setString(2, vo.getPass());
+			ps.setString(3, vo.getName());
+			ps.setInt(4, vo.getAge());
+			ps.setString(5, vo.getEmail());
+			ps.setString(6, vo.getPhone());
+			//  1,0
+			cnt = ps.executeUpdate(); // 전송(실행)
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}
+		return cnt; // 1 or 0
+	}
 
-			// rs.next() 테이블에 레코드(row) 가 있다면 true : 한줄씩 체크한다 
-			// 몇줄 있는지 모르니깐 while 담기 
+	// 회원(VO)전체 리스트(ArrayList) 가져오기
+	public ArrayList<Member> memberList() {
+		String SQL = "select * from member";
+		getConnect();
+		ArrayList<Member> list = new ArrayList<Member>();
+		try {
+			ps = conn.prepareStatement(SQL);
+			rs = ps.executeQuery(); // rs->커서
 			while (rs.next()) {
 				int num = rs.getInt("num");
 				String id = rs.getString("id");
@@ -61,12 +76,11 @@ public class MemberDAO {
 				int age = rs.getInt("age");
 				String email = rs.getString("email");
 				String phone = rs.getString("phone");
-
-				Member m = new Member(num, id, pass, name, age, email, phone);
-				list.add(m);
-				System.out.println(m);
+				// 묶고->담고
+				Member vo = new Member(num, id, pass, name, age, email, phone);
+				list.add(vo);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			dbClose();
@@ -74,116 +88,97 @@ public class MemberDAO {
 		return list;
 	}
 
-	public String checkLogin(String id, String pass) {
-		String sql = "select * from member where id =? and pass= ?";
+	public String checkMemberId(String id) {
+		String SQL = "select pass from member where id=?";
+		getConnect();
 		try {
-			getConnect();
-			ps = conn.prepareStatement(sql);
+			ps = conn.prepareStatement(SQL);
 			ps.setString(1, id);
-			ps.setString(2, pass);
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				return rs.getString("pass");
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			dbClose();
 		}
 		return null;
 	}
-	
+
 	public int getMemberNo(String id) {
-		 String SQL="select num from member where id=?";
-		 getConnect();
-
-		 try {
-		   ps=conn.prepareStatement(SQL);
-		   ps.setString(1, id);
-			rs=ps.executeQuery();
-			 if(rs.next()) {
-				 return rs.getInt("num");
-			 }
-		 } catch (Exception e) {
-			e.printStackTrace();
-		 }finally {
-			dbClose();
-		}	   
-		 return -1;
-	}
-
-
-	public Member getMemberByNum(int num) {
-		ArrayList<Member> list = getMemberList();
-		for (Member m : list) {
-			if (m.getNum() == num) {
-				return m;
-			}
-		}
-		return null;
-	}
-
-	public int addOneMember(Member member) {
-		String sql = "insert into member values(null,?,?,?,?,?,?)";
-		int row = 0;
+		String SQL = "select num from member where id=?";
+		getConnect();
 		try {
-			getConnect();
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, member.getId());
-			ps.setString(2, member.getPass());
-			ps.setString(3, member.getName());
-			ps.setInt(4, member.getAge());
-			ps.setString(5, member.getEmail());
-			ps.setString(6, member.getPhone());
-			row = ps.executeUpdate(); // 삽입한 row 갯수를 리턴 
-			System.out.println(" 회원 추가 완료 = " + row);
-		} catch (SQLException e) {
-
+			ps = conn.prepareStatement(SQL);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				return rs.getInt("num");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			dbClose();
 		}
-		return row;
+		return -1;
 	}
 
-	public int deleteOneMember(int num) {
-		String sql = "delete from member where num = ?";
-		int cnt = 0;
+	public int memberDelete(String id) {
+		String SQL = "delete from member where id=?";
+		getConnect();
+		int cnt = -1;
 		try {
-			getConnect();
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, num);
+			ps = conn.prepareStatement(SQL);
+			ps.setString(1, id);
 			cnt = ps.executeUpdate();
-			if (cnt > 0) {
-				System.out.println("회원 삭제 성공");
-			} else {
-				System.out.println("회원 삭제 실패");
-			}
-		} catch (SQLException e) {
-
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			dbClose();
 		}
 		return cnt;
 	}
 
-	public int updateOneMember(int num, int age, String email, String phone) {
-		int cnt = 0;
-		String sql = "update member set age=? , email=?, phone=? where num = ?";
+	public Member memberContent(int num) {
+		String SQL = "select * from member where num=?";
+		getConnect();
+		Member vo = null;
 		try {
-			getConnect();
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, age);
-			ps.setString(2, email);
-			ps.setString(3, phone);
-			ps.setInt(4, num);
-			cnt = ps.executeUpdate();
-			if (cnt > 0) {
-				System.out.println("회원 수정 성공");
-			} else {
-				System.out.println("회원 수정 실패");
+			ps = conn.prepareStatement(SQL);
+			ps.setInt(1, num);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				//회원한명의 정보를 가져와서->묶고(VO)
+				String id = rs.getString("id");
+				String pass = rs.getString("pass");
+				String name = rs.getString("name");
+				int age = rs.getInt("age");
+				String email = rs.getString("email");
+				String phone = rs.getString("phone");
+				vo = new Member(num, id, pass, name, age, email, phone);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbClose();
+		}
+		return vo;
+	}
 
+	public int memberUpdate(Member vo) {
+		String SQL = "update member set age=?, email=?, phone=? where num=?";
+		getConnect();
+		int cnt = -1;
+		try {
+			ps = conn.prepareStatement(SQL);
+			ps.setInt(1, vo.getAge());
+			ps.setString(2, vo.getEmail());
+			ps.setString(3, vo.getPhone());
+			ps.setInt(4, vo.getNum());
+			cnt = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			dbClose();
 		}
@@ -191,7 +186,7 @@ public class MemberDAO {
 	}
 
 	// 데이터베이스 연결 끊기
-	private void dbClose() {
+	public void dbClose() {
 		try {
 			if (rs != null)
 				rs.close();
@@ -199,7 +194,7 @@ public class MemberDAO {
 				ps.close();
 			if (conn != null)
 				conn.close();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

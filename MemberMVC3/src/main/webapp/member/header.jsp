@@ -1,25 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${ pageContext.request.contextPath }" />
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MemberMVC1</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="${ctx}/css/style.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/css/style.css">
 </head>
+
 <header>
 	<div class="row">
-		<!--py-3(y축으로) 높이 column row-->
+		<!-- py-3 높이 (56) (수직정렬) -->
+		<!-- 한줄이 col 12로 분리 할 수 있다 -->
 		<div class="w-50 py-3" onclick="location.href='${ctx}/memberList.do'">회원목록</div>
-		<c:if test="${ empty log }">
+		<c:if test="${log eq null}">
 			<div class="w-25 py-3" onclick="location.href='${ctx}/member/memberInsert.jsp'">회원가입</div>
 			<div class="w-25 py-3" onclick="location.href='${ctx}/member/memberLogin.jsp'">로그인</div>
 		</c:if>
-		<c:if test="${ log ne null }">
+		<c:if test="${log ne null}">
 			<div class="w-25 py-3" onclick="location.href='${ctx}/memberContent.do?num=${log}'">내정보</div>
-			<div class="w-25 py-3" onclick="location.href='memberLogoutPro.jsp'">로그아웃</div>
+			<div class="w-25 py-3" onclick="location.href='${ctx}/memberLogout.do'">로그아웃</div>
 		</c:if>
 	</div>
 </header>

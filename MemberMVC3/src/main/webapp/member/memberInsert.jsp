@@ -29,9 +29,11 @@
 				<td><input class="col-12" type="text" name="phone" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit" value="가입" class="col-3 btn btn-primary" /> <input type="reset" value="취소" class="col-3 btn btn-warning" /></td>
+				<td colspan="2" align="center">
+				<input type="submit" value="가입" class="col-3 btn btn-primary" />
+				<input type="reset" value="취소" class="col-3 btn btn-warning" />
+				</td>
 			</tr>
 		</table>
 	</form>
 </body>
-</html>

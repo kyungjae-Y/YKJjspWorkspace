@@ -13,15 +13,13 @@ import kr.basic.model.MemberDAO;
 public class MemberDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String ctx = req.getContextPath();
-		String num = req.getParameter("num");
-		if (num == null) {
-			res.sendRedirect(ctx + "/memberList.do");
-			return;
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String ctx = request.getContextPath();
+		int cnt = MemberDAO.getInstance().memberDelete(request.getParameter("id"));
+		if (cnt > 0) {
+			response.sendRedirect(ctx + "/memberList.do");
+		} else {
+			throw new ServletException("not delete");
 		}
-		MemberDAO.getInstance().deleteOneMember(Integer.parseInt(num));
-		res.sendRedirect(ctx + "/memberList.do");
 	}
 }

@@ -14,7 +14,9 @@
 				<td><input class="col-12" type="password" name="pw" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit" value="로그인" class="col-3 btn btn-primary" /></td>
+				<td colspan="2" align="center">
+				<input type="submit" value="로그인" class="col-3 btn btn-primary" />
+				</td>
 			</tr>
 		</table>
 	</form>
