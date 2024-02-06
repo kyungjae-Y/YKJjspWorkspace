@@ -3,7 +3,6 @@
 	<name>MemberMVC03</name>
 	<comment></comment>
 	<projects>
-		<project>jstl-1.2</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
