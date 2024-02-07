@@ -38,6 +38,7 @@ public class _09_GetJsonTest extends HttpServlet {
 	//		}
 	//	}
 
+	// jsonSimple -> 외부에서 받은 json 을 object 로 교환할 때 사용
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		// '{"id":"test6","passwd":"1234","name":"테스트6","address":"방배","tel":"010-111-6666"}'

@@ -102,7 +102,7 @@ public class MemberDAO {
 		System.out.println("id= " + id);
 		try {
 			conn = getConnection();
-			ps = conn.prepareStatement("select id from member where id = ?");
+			ps = conn.prepareStatement("select id from member where id=?");
 			ps.setString(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) { // 아이디 존재
@@ -122,7 +122,7 @@ public class MemberDAO {
 		MemberVO member = null;
 		try {
 			conn = getConnection();
-			ps = conn.prepareStatement("select * from member where id = ? ");
+			ps = conn.prepareStatement("select * from member where id=?");
 			ps.setString(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) { // 해당 아이디에 대한 레코드가 존재
@@ -147,7 +147,7 @@ public class MemberDAO {
 		int x = 0;
 		try {
 			conn = getConnection();
-			ps = conn.prepareStatement("update member set name=?,address=?,tel=? where id=? and passwd=?");
+			ps = conn.prepareStatement("update member set name=?, address=?, tel=? where id=? and passwd=?");
 			ps.setString(1, member.getName());
 			ps.setString(2, member.getAddress());
 			ps.setString(3, member.getTel());
@@ -168,7 +168,7 @@ public class MemberDAO {
 		try {
 			conn = getConnection();
 			String dbPw = "";
-			ps = conn.prepareStatement("select passwd from member where id = ?");
+			ps = conn.prepareStatement("select passwd from member where id=?");
 			ps.setString(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) {

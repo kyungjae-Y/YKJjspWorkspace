@@ -16,9 +16,11 @@ import com.google.gson.Gson;
 import member.MemberDAO;
 import member.MemberVO;
 
+// gson.jar -> 외부로 json 파일을 보낼 때 사용
 @WebServlet("/jsonDataTest.do")
 public class _08_JsonDataTest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	// ajax 가 실행되고 서블릿으로 요청이 온다
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -27,6 +29,7 @@ public class _08_JsonDataTest extends HttpServlet {
 		// application/json 으로 바꿔준다
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
+		// json 으로 변경을 해주는 클래스
 		Gson gson = new Gson();
 		String choice = request.getParameter("choice");
 		// 처리한 데이터를 JSON 문자열 데이터로 변환한 후 저장할 변수
