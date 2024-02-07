@@ -8,17 +8,17 @@
 		<a href="${ctx}/boardList.do">전체 게시글 확인하기</a>
 	</h3>
 	<h3>
-		<a href="_02_addDummyPro.jsp">더미 게시글 추가하기</a>
+		<a href="${ctx}/boardAddDummy.do">더미 게시글 추가하기</a>
 	</h3>
-	<h3>
+	<!-- 	<h3>
 		<a href="_03_deleteAllBoardPro.jsp">전체 게시글 삭제하기</a>
-	</h3>
+	</h3> -->
 	<h3>
 		<a href="${ctx}/board/boardAdd.jsp">게시글 추가하기</a>
 	</h3>
 	<hr>
 	<h3>
-		<a href="_07_boardListPaging.jsp">페이징 게시판</a>
+		<a href="${ctx}/boardListPaging.do">페이징 게시판</a>
 	</h3>
 </body>
 </html>

@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="./header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <body>
-	<p>전체 게시글 수 ${list.size()}</p>
 	<table border="1">
 		<tr>
 			<th>번호</th>
@@ -28,7 +22,15 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<c:if test="${start > cnt}">
+		[<a href="${ctx}/boardListPaging.do?start=${start - 1}&curNum=${start - cnt}">이전</a>]
+	</c:if>
+	<c:forEach var="i" begin="${start}" end="${end}">
+		[<a href="${ctx}/boardListPaging.do?start=${i}&curNum=${start}">${i}</a>]
+	</c:forEach>
+	<c:if test="${end < totalCnt}">
+		[<a href="${ctx}/boardListPaging.do?start=${start + cnt}&curNum=${start + cnt}">이후</a>]
+	</c:if>
 	<br>
 	<button onclick="location.href='${ctx}/board/main.jsp'">메인으로</button>
 </body>
-</html>
