@@ -62,7 +62,7 @@
   document.getElementById("checkId").addEventListener("click", () => {
     let query = "id="+document.getElementById("id").value;
     if (document.getElementById("id").value) {
-      sendFetchRequest("confirm.do", "POST", query,(data)=> {
+      sendFetchRequest("confirm.do", "POST", query, (data)=> {
         if (data == 1) {
           alert('사용할 수 없는 id 입니다');
           document.getElementById("id").value = ''; 
