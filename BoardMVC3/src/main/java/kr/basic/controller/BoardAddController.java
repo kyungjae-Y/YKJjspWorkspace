@@ -4,24 +4,22 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.basic.model.Board;
 import kr.basic.model.BoardDAO;
 
-@WebServlet("/boardAdd.do")
-public class BoardAddController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+public class BoardAddController implements Controller {
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		String writer = req.getParameter("b_writer");
-		String subject = req.getParameter("b_subject");
-		String contents = req.getParameter("b_contents");
+	public String requestHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		if (request.getParameter("b_no") == null) {
+			return "boardAdd";
+		}
+		String writer = request.getParameter("b_writer");
+		String subject = request.getParameter("b_subject");
+		String contents = request.getParameter("b_contents");
 		LocalDate regDate = LocalDate.now();
 
 		Board b = new Board();
@@ -29,10 +27,10 @@ public class BoardAddController extends HttpServlet {
 		b.setSubject(subject);
 		b.setContents(contents);
 		b.setRegDate(regDate.toString());
-		String ctx = req.getContextPath();
+		String ctx = request.getContextPath();
 		int cnt = BoardDAO.getInstance().boardAdd(b);
 		if (cnt > 0) {
-			res.sendRedirect(ctx + "/boardList.do");
+			return "redirect:" + ctx + "/boardAdd.do";
 		} else {
 			throw new ServletException("not add");
 		}

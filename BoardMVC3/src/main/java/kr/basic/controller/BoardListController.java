@@ -3,25 +3,26 @@ package kr.basic.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.basic.model.Board;
 import kr.basic.model.BoardDAO;
 
-@WebServlet("/boardList.do")
-public class BoardListController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+public class BoardListController implements Controller {
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	public String requestHandler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Board> list = BoardDAO.getInstance().boardList();
-		req.setAttribute("list", list);
-		RequestDispatcher rd = req.getRequestDispatcher("board/boardList.jsp");
-		rd.forward(req, res);
+		request.setAttribute("list", list);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("log") != null) {
+			int num = (int) session.getAttribute("log");
+			request.setAttribute("no", num);
+		} else {
+			request.setAttribute("no", null);
+		}
+		return "boardList";
 	}
 }
