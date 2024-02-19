@@ -108,9 +108,13 @@
 
 			<Host appBase="webapps" autoDeploy="true" name="localhost"
 				unpackWARs="true">
-				<Context docBase="C:\YKJ_RentCar\rentcarMVC2\src\main\webapp\img" path="/img" reloadable="false" />
-				<!-- SingleSignOn valve, share authentication between web applications 
-					Documentation at: /docs/config/valve.html -->
+				<Context
+					docBase="C:\\YKJ_RentCar\\rentcarMVC2\\src\\main\\webapp\\img"
+					path="rentcar/img" reloadable="true" />
+				<Context docBase="C:\\YKJjspWorkspace\\MemberMVC6\\src\\main\\webapp\\img"
+					path="member/img" reloadable="true" />
+				<!-- SingleSignOn valve, share authentication between web applications Documentation 
+					at: /docs/config/valve.html -->
 				<!-- <Valve className="org.apache.catalina.authenticator.SingleSignOn" 
 					/> -->
 
@@ -120,8 +124,8 @@
 					directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b"
 					prefix="localhost_access_log" suffix=".txt" />
 
-				<Context docBase="rentcarMVC2" path="/rentcarMVC2"
-					reloadable="true" source="org.eclipse.jst.jee.server:rentcarMVC2" />
+				<Context docBase="MemberMVC6" path="/MemberMVC6"
+					reloadable="true" source="org.eclipse.jst.jee.server:MemberMVC6" />
 			</Host>
 		</Engine>
 	</Service>
