@@ -5,7 +5,7 @@
 	<div class="inner">
 		<form id="car-form" action="reservateCar.do" method="post" id="optionForm">
 			<div class="car-desc">
-				<h2>${car.name}대여옵션선택</h2>
+				<h2>${car.name}대여옵션 선택</h2>
 				<div class="car-photo">
 					<img src="/upload/${car.img}">
 					<p id="price" data-price="${car.price}">하루 랜트 당 가격 ${car.price}원</p>
@@ -93,7 +93,7 @@
 					<td colspan="2" id="carDate"></td>
 				</tr>
 				<tr>
-					<td>차량 개수</td>
+					<td>차량 갯수</td>
 					<td colspan="2" id="carCnt"></td>
 				</tr>
 				<tr>
@@ -110,6 +110,7 @@
 					<td>차량 총액 합산</td>
 					<td colspan="2" id="carTotals">0 원</td>
 				</tr>
+
 				<tr>
 					<td colspan="3">
 						<button id="delBtn">예약 취소</button>

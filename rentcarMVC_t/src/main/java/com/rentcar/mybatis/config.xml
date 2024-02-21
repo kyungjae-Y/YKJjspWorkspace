@@ -13,6 +13,7 @@
 		<typeAlias type="com.rentcar.vo.JoinCarView"
 			alias="joinCarView" />
 	</typeAliases>
+
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC" />
@@ -24,6 +25,7 @@
 			</dataSource>
 		</environment>
 	</environments>
+
 	<mappers>
 		<mapper resource="com/rentcar/mybatis/UserMapper.xml" />
 		<mapper resource="com/rentcar/mybatis/RentcarMapper.xml" />

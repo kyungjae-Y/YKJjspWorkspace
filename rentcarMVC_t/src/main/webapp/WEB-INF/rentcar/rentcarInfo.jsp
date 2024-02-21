@@ -14,7 +14,7 @@
 			<table class="car-table">
 				<tr>
 					<td colspan="2">
-						<h2>${vo.name}차 량 선 택</h2>
+						<h2>${vo.name} 차 량 선 택</h2>
 					</td>
 				</tr>
 				<tr>

@@ -39,7 +39,7 @@ function loginAjax(form) {
 		.then(data => {
 			deActvieLoginModal();
 			if (data !== "null") {
-				actvieMsgModal(data + "님 로그인하셨습니다");
+				actvieMsgModal(data + " 님 로그인하셨습니다");
 				document.querySelector('.login-user').style.display = "block";
 				document.querySelector('.all-user').style.display = "none";
 				document.querySelector('.login-user').children[0].innerHTML = " [ " + data + " ] 님"
@@ -47,7 +47,6 @@ function loginAjax(form) {
 			} else {
 				actvieMsgModal("로그인 실패");
 			}
-
 		})
 		.catch(error => console.error('Error:', error));
 	form.id.value = "";
@@ -71,7 +70,6 @@ document.querySelector('.logout-btn').addEventListener('click', () => {
 		.then(response => response.text())
 		.catch(error => console.error('Error:', error));
 	actvieMsgModal("로그아웃 성공");
-
 	setTimeout(() => {
 		location.href = ctx + "/main.do";
 	}, 500)

@@ -6,20 +6,17 @@ let deActvieCarModal = () => {
 	document.querySelector('.car-modal').classList.remove('active');
 	document.querySelector('.overlay').classList.remove('active');
 }
-
 const form = document.querySelector('#car-form');
 form.addEventListener("submit", (event) => {
 	event.preventDefault();
 	checkValue();
 });
-
 document.querySelector('.car-modal-btn').addEventListener("click", deActvieCarModal);
 let carReservation = {
 	reserveSeq: null,
 	num: document.querySelector("#num").value,
 	qty: document.querySelector("#qty").value,
 };
-
 let today = new Date().toISOString().split("T")[0];
 document.querySelector("#date").value = today;
 document.querySelector("#date").min = today;
@@ -93,20 +90,19 @@ function carReservationAjax() {
 		.then(response => response.json())
 		.then(data => {
 			if (data == 1) {
-				actvieMsgModal("렌트카 예약 성공 ");
-
+				actvieMsgModal("렌트카 예약 성공");
 				setTimeout(() => {
 					location.href = ctx + "/main.do";
 				}, 500)
 			} else {
 			}
 		})
-		.catch(error => console.error('Error:', error));
+		.catch(error => console.error('Error : ', error));
 }
 (() => {
 	let ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
 	if (!document.querySelector('#userId').value) {
-		alert(" 로그인 먼저 해주세요 ");
+		alert(" 로그인 먼저 해주세요");
 		location.href = ctx + "/main.do";
 	}
 })();

@@ -19,7 +19,7 @@ public class RentcarFrontController extends HttpServlet {
 		System.out.println("url = " + url);
 		String ctx = request.getContextPath();
 		String command = url.substring(ctx.length());
-		System.out.println("command=" + command);
+		System.out.println("command = " + command);
 		Controller controller = null;
 		String nextPage = null;
 		HandlerMapping mapping = new HandlerMapping();

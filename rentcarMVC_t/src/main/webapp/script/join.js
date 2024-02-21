@@ -24,7 +24,6 @@ function getResult(data) {
 		$("#pw").focus();
 		$("#id").css("border", "3px blue solid")
 		check = 1;
-
 	} else {
 		$("#msg").html("이미 사용하고 있는 id 입니다");
 		$("#id").val("");
@@ -66,12 +65,14 @@ function validCheck(form) {
 	}
 	form.submit();
 }
+
 $("#id").keyup(function(e) {
 	if (e.keyCode == '8') {
 		check = 0;
 	}
 	$("#id").css("border", "");
 });
+
 let inputs = document.querySelectorAll("input");
 inputs.forEach((input) => {
 	input.onchange = function() {

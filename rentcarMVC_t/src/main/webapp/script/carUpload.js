@@ -134,7 +134,7 @@ function carInsertAjax(car) {
 
 function uploadImg() {
 	if (isUpload) {
-		alert('이미 업로드 처리 중 ')
+		alert('이미 업로드 처리 중')
 		return;
 	}
 	let file = document.querySelector('#formFile').files[0];

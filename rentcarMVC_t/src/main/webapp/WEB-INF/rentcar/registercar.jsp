@@ -59,7 +59,6 @@
 								<textarea class="fv" name="info"> 추가한 차량입니다 </textarea>
 							</td>
 						</tr>
-
 						<tr height="40">
 							<input class="fv" id="imgVal" type="hidden" name="img" value="" />
 							<td colspan="2">
@@ -72,7 +71,6 @@
 		</div>
 	</div>
 </main>
-
 <div class="modal upload-modal">
 	<div class="modal-content">
 		<p>차량 이미지 등록</p>
@@ -83,6 +81,5 @@
 		<button class="upload-btn" onclick="uploadImg()">이미지 등록</button>
 	</div>
 </div>
-
 <%@ include file="../parts/footer.jsp"%>
 <script type="text/javascript" src="script/carUpload.js" defer></script>
