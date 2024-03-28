@@ -19,12 +19,16 @@
 		</tr>
 		<c:forEach var="board" items="${list}">
 			<tr>
-				<td><a href="boardContent.do?no=${board.no}">${board.no}</a></td>
+				<td>
+					<a href="boardContent.do?no=${board.no}">${board.no}</a>
+				</td>
 				<td>${board.writer}</td>
 				<td>${board.subject}</td>
 				<td>${board.contents}</td>
 				<td>${board.regDate}</td>
-				<td><button onclick="location.href='${ctx}/boardDelete.do?no=${board.no}'">삭제</button></td>
+				<td>
+					<button onclick="location.href='${ctx}/boardDelete.do?no=${board.no}'">삭제</button>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>

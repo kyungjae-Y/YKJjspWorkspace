@@ -12,7 +12,7 @@
 			</ul>
 		</aside>
 		<div class="car-content">
-			<h2>${title} 조회</h2>
+			<h2>${title}조회</h2>
 			<div class="itemWrap">
 				<c:forEach var="vo" items="${list}">
 					<div class="item" onclick="checkQty('${vo.totalQty}','${ctx}','${vo.num}')">

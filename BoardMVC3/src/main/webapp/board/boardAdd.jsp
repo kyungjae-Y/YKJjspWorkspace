@@ -10,18 +10,26 @@
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input type="text" name="b_writer" required></td>
+				<td>
+					<input type="text" name="b_writer" required>
+				</td>
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="b_subject" required></td>
+				<td>
+					<input type="text" name="b_subject" required>
+				</td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea rows="10" cols="20" name="b_contents" required></textarea></td>
+				<td>
+					<textarea rows="10" cols="20" name="b_contents" required></textarea>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="작성완료"></td>
+				<td colspan="2">
+					<input type="submit" value="작성완료">
+				</td>
 			</tr>
 		</table>
 	</form>
